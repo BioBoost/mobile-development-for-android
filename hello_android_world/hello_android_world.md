@@ -68,3 +68,54 @@ Last we need to give this first screen a name. This is actually the name of the 
 ![Naming the Activity](img/naming_first_activity.png)
 
 Once done, hit the finish button to launch the project view of your new application inside Android Studio.
+
+### Creating a Virtual Device
+
+Before we test our application on a physical device, it's a good idea to test it on a virtual device. In practice this is often done as not each Android developer has multiple devices at his disposal. Let us for example create a table device. Inside Android Studio navigate to "Tools => Android => AVD Manager", where AVD stands for Android Virtual Device.
+
+![Android Virtual Device (AVD) Manager](img/avd_manager.png)
+
+Start the AVD wizard by selecting "Create Virtual Device ...". First you need to select which type of device you would like to create. Since we have phones in the LAB, it would be useful to create a tablet device. Select the tablet category and choose a generic 10.1 inch tablet. Of course not all existing devices are available here as a predefined template. However using the "New Hardware Profile" option you can specify all the parameters of your virtual device. More on this later.
+
+![AVD Device Type](img/avd_device_type.png)
+
+Next the Android version needs to be specified for the device. Since the LAB smartphones are running Android 5.0.1, we will choose Marshmallow for our virtual device. This allows us to test our application with both Android versions on both a smartphone and a tablet. You will first need to download the image. This can be accomplished by selecting the "Download" option next to the name of the Android version.
+
+![AVD Android Version for System Image](img/avd_version.png)
+
+Give the AVD a decent name, as more will be created as we progress through this course. You can also set some other options such as the default startup orientation (portrait or landscape). You can also enable the device frame to show a realistic device frame around the emulator window.
+
+![AVD Naming and Options](img/avd_name_options.png)
+
+Feel free to create a new AVD later on and experiment with all the settings. Not much wrong you can do, chances of creating a black hole are slim at best.
+
+One you click finish your new device should be available in the AVD manager.
+
+![AVD Your Device Available](img/avd_new_available.png)
+
+You can now close the AVD manager.
+
+### Running the Application on a Virtual Device
+
+When you want to run your application you have two options on how to run the app:
+* **Run app**: (SHIFT-F10) this deploys the application on the device (virtual or not) and starts it. If anything goes wrong it just crashes. Not much you can do about it.
+* **Debug app**: (SHIFT-F9) when running an application in debug mode, a special connection is made between your application and the IDE. This is typically called the attachment of a debugger. This allows you to monitor every step your application performs and even allows you to intervene. You can for example run parts of code line by line, or place a breakpoint where the application should pause until the debugger states it can continue (most often by your action as a programmer).
+
+While developing applications we will most often start the app in debug mode. Even if we do not monitor it using the debugger. This because you will get a lot more information when the application crashes. This information is found in the debugger logs. But more on this later.
+
+When you select to run your application (either in debug mode or normal mode) a window will appear asking on which device you wish to run the app. Since we do not have a physical device attached yet, we will only see the virtual tablet device.
+
+<!-- TODO: What with devices with a lower API than minimum? Do they show up or are they hidden at that point ? -->
+
+![Select an AVD](img/first_run_on_avd.png)
+
+Select the device and hit OK. The virtual device should boot and your application should be started. Congrats you just ran your first virtual android application.
+
+![Hello World on AVD](img/avd_hello_world.png)
+
+Want to try something interactive? Hit the envelope at the bottom right corner.
+
+See the action menu on the right of the AVD window? Try rotating the device.
+
+> #### Info::Do not close the AVD
+> You should not close the AVD window while developing. Otherwise the device is shut down and it needs to restart the next time you choose to run your application. Just minimize it to save time. If you change something in your application and you run it, it will be redeployed on the AVD.
