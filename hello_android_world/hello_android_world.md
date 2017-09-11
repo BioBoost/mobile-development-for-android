@@ -2,7 +2,35 @@
 
 # Hello Android World
 
-Before we start with the development of Android applications we will need to decide on which version of Android we will focus. For this it's best to take a look at which version is currently deployed on the most devices. As can be seen in the chart below this would be version 6.0 or Marshmallow.
+For the development of Android applications we will make use of an IDE (Integrated Development Environment) called Android Studio. This is the official standard and is considered the best (only) option out there.
+
+## Android Studio
+
+Android Studio is the official IDE for Google's Android operating system, built based on JetBrains' IntelliJ IDEA software and designed specifically for Android development. It is available for download on Windows, macOS and Linux based operating systems. It is a replacement for the Eclipse Android Development Tools (ADT) as primary IDE for native Android application development.
+
+The current stable version is 2.3.3, released in June 2017. Next major update, version 3.0, is in preview stage as of August 2017.
+
+Since we love working on the edge, we will be using the preview version, eagerly awaiting the stable release of it. Navigate to (https://sillevl.gitbooks.io/software-installation-guide)[https://sillevl.gitbooks.io/software-installation-guide] and follow the installation guide to install the latest Android Studio 3.0 version.
+
+### Some cool features
+
+Android Studio has some cool and fancy features, some of which are:
+
+* **Fast and feature-rich emulator:** Install and run your apps faster than with a physical device and test your app on virtually any Android device configuration: Android phones, Android tablets, Android Wear, and Android TV devices. The new Android Emulator 2.0 is faster than ever and allows you to dynamically resize the emulator and access a suite of sensor controls.
+
+* **Intelligent code editor:** Write better code, work faster, and be more productive with an intelligent code editor that helps you each step of the way. Android Studio is built on IntelliJ and is capable of advanced code completion, refactoring, and code analysis.
+
+* **Instant Run:** Push code and resource changes to your app running on a device or emulator and see the changes instantly come to life. Instant Run dramatically speeds up your edit, build, and run cycles, keeping you "in the flow."
+
+* **Robust and flexible build system:** Easily configure your project to include code libraries and generate multiple build variants from a single project. With Gradle, Android Studio offers high-performance build automation, robust dependency management, and customizable build configurations.
+
+* **Develop for all Android devices:** Target multiple form factors with a single project to easily share code among your different versions of your app. Android Studio provides a unified environment to develop apps for Android phones, tablets, Android Wear, Android TV, and Android Auto.
+
+* **Code templates and GitHub integration:** Start projects with code templates for patterns such as navigation drawer and view pagers, or import Google code samples from GitHub. Android Studio's project wizards make it easier than ever to add code in a new project.
+
+### Choosing a Target Version
+
+Before we start with the development of Android applications we will need to decide on which version of Android we will focus. For this it's best to take a look at which version is currently deployed on most devices. As can be seen in the chart below this would be version 6.0 or Marshmallow.
 
 ![Version Usage[^1]](img/version_usage.png)
 
@@ -10,27 +38,23 @@ Before we start with the development of Android applications we will need to dec
 
 However our phones that we currently have at our disposal are equipped with Lollipop (version 5).
 
-Taking both into consideration we will focus on Android 6.0 and make sure our apps are also compatible with Android 5.0.
+Taking both into consideration we will focus on Android 5.0. However nothing is holding us back to later on evolve to Marshmallow and try it out on a virtual device.
 
-## Android Studio
+### Installing the SDKs
 
-Android Studio is the official integrated development environment (IDE) for Google's Android operating system, built based on JetBrains' IntelliJ IDEA software and designed specifically for Android development. It is available for download on Windows, macOS and Linux based operating systems. It is a replacement for the Eclipse Android Development Tools (ADT) as primary IDE for native Android application development.
+Before one can start with the development of applications for Android its necessary to install the correct SDKs (Software Development Kit). The Android SDK provides you with the API libraries and developer tools necessary to build, test, and debug apps for Android.
 
-The current stable version is 2.3.3, released in June 2017. Next major update, version 3.0, is in preview stage as of August 2017. Since we love working on the edge, we will be using the preview version, eagerly awaiting the stable release of it. Navigate to (https://sillevl.gitbooks.io/software-installation-guide)[https://sillevl.gitbooks.io/software-installation-guide] and follow the installation guide to install the latest Android Studio 3.0 version.
+When launching Android Studio you will get presented with the welcome screen shown below. From here projects can be created, opened, imported, ... but also other Android Studio components can be launched.
 
-### Some cool features
+![Welcome Screen of Android Studio](img/starting_as.png)
 
-* **Instant Run:** Push code and resource changes to your app running on a device or emulator and see the changes instantly come to life. Instant Run dramatically speeds up your edit, build, and run cycles, keeping you "in the flow."
+One of them is the SDK manager. To open the SDK manager select the "Configure" option at the bottom right corner and choose "SDK Manager".
 
-* **Intelligent code editor:** Write better code, work faster, and be more productive with an intelligent code editor that helps you each step of the way. Android Studio is built on IntelliJ and is capable of advanced code completion, refactoring, and code analysis.
+The SDK manager will show the currently installed SDK versions.
 
-* **Fast and feature-rich emulator:** Install and run your apps faster than with a physical device and test your app on virtually any Android device configuration: Android phones, Android tablets, Android Wear, and Android TV devices. The new Android Emulator 2.0 is faster than ever and allows you to dynamically resize the emulator and access a suite of sensor controls.
+Too allow us to develop for both Marshmallow and for Lollipop we will need to install both SDK versions. Check both API 21 and API 23 and hit the "Apply" button. Sit back for a minute as this will take some time.
 
-* **Robust and flexible build system:** Easily configure your project to include code libraries and generate multiple build variants from a single project. With Gradle, Android Studio offers high-performance build automation, robust dependency management, and customizable build configurations.
-
-* **Develop for all Android devices:** Target multiple form factors with a single project to easily share code among your different versions of your app. Android Studio provides a unified environment to develop apps for Android phones, tablets, Android Wear, Android TV, and Android Auto.
-
-* **Code templates and GitHub integration:** Start projects with code templates for patterns such as navigation drawer and view pagers, or import Google code samples from GitHub. Android Studio's project wizards make it easier than ever to add code in a new project.
+<!-- TODO: Add screenshot -->
 
 ## Creating your first Android application
 
