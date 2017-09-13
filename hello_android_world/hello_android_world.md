@@ -52,9 +52,17 @@ One of them is the SDK manager. To open the SDK manager select the "Configure" o
 
 The SDK manager will show the currently installed SDK versions.
 
-Too allow us to develop for both Marshmallow and for Lollipop we will need to install both SDK versions. Check both API 21 and API 23 and hit the "Apply" button. Sit back for a minute as this will take some time.
+![No SDKs installed](img/no_sdks_installed.png)
 
-<!-- TODO: Add screenshot -->
+Too allow us to develop for both Marshmallow and for Lollipop we will need to install both SDK versions. Check both API 21 and API 23 and hit the "Apply" button. Do make sure to accept the license agreement otherwise some components may not be installed.
+
+![SDK License Agreement](img/sdk_license.png)
+
+Sit back for a minute as this will take some time. Do not select other versions as it will take too much time to install.
+
+![End Result of Installed SDKs](img/installed_sdks.png)
+
+If you wish to add other versions later on, please feel free but do it outside of the course hours as it does take a long time.
 
 ## Creating your first Android application
 
@@ -143,3 +151,43 @@ See the action menu on the right of the AVD window? Try rotating the device.
 
 > #### Info::Do not close the AVD
 > You should not close the AVD window while developing. Otherwise the device is shut down and it needs to restart the next time you choose to run your application. Just minimize it to save time. If you change something in your application and you run it, it will be redeployed on the AVD.
+
+## Setting up a Physical Device
+
+For the LABs you can use your own Android device (if it supports at least Android 5.0) or you can use one of our devices. Most of our devices are Huawei P8 Lite smartphones. Decent phones for a decent price.
+
+![Huawei P8 Lite](img/huawei_p8_lite.jpg)
+
+When you receive them for the first time please reset them to factory settings by opening "Settings => Backup & reset => Factory data reset" and selecting "Reset phone". Also make sure to check "Erase internal storage". Confirm to continue resetting the device.
+
+Configure the device after it has restarted. You can logon to the "campusroam" WiFi network.
+
+You can use your own google account or choose to create a new one. Once identified you can choose not to login using the account. This way no one has access to your account. This will mean you will not be able to access the store or check your mails. This is however not necessary for the course. You can mark the box of the phone so you can use the same phone every week in the LABs. At the end of the course you are encouraged to reset all phones back to factory settings.
+
+### Enabling Developer mode
+
+Next you need to unlock developer mode. This will allow you to deploy applications to the phone via USB and will also allow you to debug them.
+
+For the Huawei P8 Lite you need to traverse to "Settings => About phone" and tap the "Build number" about 7 times. The system should display a message stating that you are now a developer.
+
+For other types of phones this procedure might be different. Use google to find out.
+
+### Running application on physical device
+
+To run an application on the device you need to connect it via USB to your computer. While the device will show up in Windows Explorer as an external media device, this is not enough to deploy applications on the phone and run a debugger. You need to install additional drivers for this.
+
+For the Huawei P8 Lite you need to install HiSuite which contains the ADB driver (Android Debug Bridge). It can be found at [http://consumer.huawei.com/minisite/HiSuite_en/](http://consumer.huawei.com/minisite/HiSuite_en/).
+
+Once installed, start HiSuite and make sure your phone is connected via USB. You should then see a connect button in HiSuite. Click it and follow the instruction on the screen to get the device connected.
+
+Next you will also need to enable USB debugging. Go to "Settings => Developer options" and enable "USB debugging". You will get a window asking you to confirm the attached laptop as an authorized device together with an RSA fingerprint. Select "Always allow from this computer" to make the device remember for next time.
+
+![USB Debugging and RSA Fingerprint](img/rsa_fingerprint.jpg)
+
+For other phones you will need to search the Internet.
+
+Next time you want to run your application the physical device should be in the list of target devices along side the virtual devices.
+
+![Selecting the Deployment Target](img/huawei_physical_device.png)
+
+Once you hit OK, your application should appear on your phone. Congratz time to move to the next chapter.
