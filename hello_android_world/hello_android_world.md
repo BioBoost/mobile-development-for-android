@@ -218,7 +218,7 @@ Let's take a look at the most important directories and files that can be found 
 
 While in some cases it may be quicker to edit the XML file manually, in most cases we will be using the graphical drag and drop editor. A huge advantage of Android Studio is the fact that you can immediately see the resulting GUI as you add components to it.
 
-![Graphical GUI Editor](img/GUI.png)
+![Graphical GUI Editor](img/gui.png)
 
 * `app > manifests > AndroidManifest.xml`
 
