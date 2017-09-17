@@ -190,4 +190,77 @@ Next time you want to run your application the physical device should be in the 
 
 ![Selecting the Deployment Target](img/huawei_physical_device.png)
 
-Once you hit OK, your application should appear on your phone. Congratz time to move to the next chapter.
+Once you hit OK, your application should appear on your phone.
+
+## Android Project View
+
+First, be sure the Project window is open (`View => Tool Windows => Project`) and the Android view is selected from the drop-down list at the top of that window. The Android project view in Android Studio shows a flattened version of your project's structure that provides quick access to the key source files of Android projects. Do note that the project structure on disk differs from this representation.
+
+![Android Project View](img/android_project_view.png)
+
+Let's take a look at the most important directories and files that can be found here.
+
+* `app > java`: Contains the java source code files
+
+  * `app > java > be.vives.nico.hello_world.helloworld > MainActivity.java`: This is the main activity (the entry point for your app). When you build and run the app, the system launches an instance of this Activity and loads its layout.
+
+
+* `app > res`: Contains all the **resource files** used in the application such as images (multiple resolutions), GUI layout and string literals
+
+ * `app > res > values > strings.xml`: Contains string literals which can be referenced inside your application. This allows for easy translation (automatically selected based on the user's locale).
+
+ > #### Info::Locale
+> In computing, a *locale* is a set of parameters that defines the user's language, country and any special variant preferences that the user wants to see in their user interface. To see which locale are supported open a AVT and launch the application "Custom Locale"
+
+![Custom Locale](img/custom_locale.png)
+
+ * `app > res > layout > activity_main.xml` and `app > res > layout > content_main.xml`: These XML files define the layout for your activity's UI. As of API 23 the user interface layout is split up in two files instead of one. The `activity_main.xml` is the "outer" part of the activity layout (toolbar, action button, etc.) and `content_main.xml` is the inner part where you put your own layout (the blank space). So most of our work needs to be done inside `content_main.xml`.
+
+While in some cases it may be quicker to edit the XML file manually, in most cases we will be using the graphical drag and drop editor. A huge advantage of Android Studio is the fact that you can immediately see the resulting GUI as you add components to it.
+
+![Graphical GUI Editor](img/GUI.png)
+
+* `app > manifests > AndroidManifest.xml`
+
+Every application must have an AndroidManifest.xml file (with precisely that name) in its root directory. The manifest file provides essential information about your app to the Android system, which the system must have before it can run any of the app's code.
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="be.vives.nico.hello_world.helloworld">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>
+```
+
+Among other things, the manifest file does the following:
+
+1. It **names the Java package** for the application. The package name serves as a unique identifier for the application.
+2. It describes the **components of the application**, which include the activities, services, broadcast receivers, and content providers that compose the application. It also names the classes that implement each of the components and publishes their capabilities, such as the Intent messages that they can handle. These declarations inform the Android system of the components and the conditions in which they can be launched.
+3. It determines the processes that host the application components.
+4. It declares the **permissions** that the application must have in order to access protected parts of the API and interact with other applications. It also declares the permissions that others are required to have in order to interact with the application's components.
+5. It lists the **Instrumentation classes** that provide profiling and other information as the application runs. These declarations are present in the manifest only while the application is being developed and are removed before the application is published.
+6. It declares the **minimum level of the Android API** that the application requires.
+7. It **lists the libraries** that the application must be linked against.
+
+More info about the Manifest file can be found @ [https://developer.android.com/guide/topics/manifest/manifest-intro.html](https://developer.android.com/guide/topics/manifest/manifest-intro.html).
+
+* `Gradle Scripts > build.gradle`: Gradle is an open source build automation system. You'll see two files with this name: one for the project and one for the "app" module. Each module has its own build.gradle file, but this project currently has just one module. You'll mostly work with the module's build.gradle file to configure how the Gradle tools compile and build your app. More on this later as we explore the build process of an Android Application
