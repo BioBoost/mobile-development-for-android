@@ -84,7 +84,6 @@ Android is an open source, Linux-based software stack created for a wide array o
 ![The Android software stack ^4](img/android-stack_2x.png)
 [^4]: Source https://developer.android.com/guide/platform/index.html
 
-
 ### The Linux Kernel
 
 The foundation of the Android platform is the Linux kernel. For example, the Android Runtime (ART) relies on the Linux kernel for underlying functionalities such as:
