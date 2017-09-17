@@ -13,3 +13,19 @@
 <!-- * [Summary](hello_android_world/summary.md) -->
 <!-- * [Quiz](hello_android_world/quiz.md) -->
 <!-- * [Exercises](hello_android_world/exercises.md) -->
+
+<!-- ### Debugging -->
+<!-- * [Debugging](debugging/debugging.md) -->
+<!-- * [Summary](debugging/summary.md) -->
+<!-- * [Quiz](debugging/quiz.md) -->
+<!-- * [Exercises](debugging/exercises.md) -->
+
+<!-- ### The Build Process -->
+<!-- * [The Build Process](the_build_process/the_build_process.md) -->
+<!-- * [Summary](debugging/summary.md) -->
+<!-- * [Quiz](debugging/quiz.md) -->
+<!-- * [Exercises](debugging/exercises.md) -->
+
+----
+
+* [Sources](sources.md)
