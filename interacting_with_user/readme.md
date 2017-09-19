@@ -69,7 +69,7 @@ The Component Tree window on the bottom-left side shows the layout's hierarchy o
 
 ## Building a Basic Input Form
 
-Try building a basic input form using `TextView`, `EditText` and `Button` components like shown below. Experiment a bit with the different options of the drag-and-drop editor. For some tips on using the anchors you can take a look at [https://developer.android.com/training/basics/firstapp/building-ui.html#textbox](https://developer.android.com/training/basics/firstapp/building-ui.html#textbox).
+Try building a basic input form using `TextView`, `EditText` and `Button` components like shown below. Experiment a bit with the different options of the drag-and-drop editor. For some tips on using the anchors you can take a look at [https://developer.android.com/training/basics/firstapp/building-ui.html#textbox](https://developer.android.com/training/basics/firstapp/building-ui.html#textbox) or [https://medium.com/exploring-android/exploring-the-new-android-constraintlayout-eed37fe8d8f1](https://medium.com/exploring-android/exploring-the-new-android-constraintlayout-eed37fe8d8f1).
 
 ![Basic Input Form](img/basic_input_form.png)
 
@@ -104,3 +104,79 @@ SP is similar to the DP unit but additionally it is also scaled according to the
 Some absolute units include mm (millimeter), in (inches), pt (points) and px (pixels). These should all be avoided as they will not scale between different devices and screen sizes.
 
 ![Absolute versus relative sizing](img/absolute_vs_relative_sizing.png)
+
+## Event Handling
+
+Events are a useful way to collect data about a user's interaction with interactive components of an app. Events in Android can take a variety of different forms, but are usually generated in response to an external action. The most common form of events, particularly for devices such as tablets and smartphones, involve some form of interaction with the touch screen. Such events fall into the category of input events.
+
+The Android framework maintains an event queue into which events are placed as they occur. Events are then removed from the queue on a first-in, first-out (FIFO) basis. In the case of an input event such as a touch on the screen, the event is passed to the view positioned at the location on the screen where the touch took place. In addition to the event notification, the view is also passed a range of information (depending on the event type) about the nature of the event such as the coordinates of the point of contact between the user’s fingertip and the screen.
+
+In order to be able to handle the event that it has been passed, the view must have in place an **event listener**. The Android View class, from which all user interface components are derived, contains a range of event listener interfaces, each of which contains an abstract declaration for a **callback method**. In order to be able to respond to an event of a particular type, a view must register the appropriate event listener and implement the corresponding callback.
+
+For example, if a button is to respond to a click event (the equivalent to the user touching and releasing the button view as though clicking on a physical button) it must both register the View.onClickListener event listener (via a call to the target view’s setOnClickListener() method) and implement the corresponding onClick() callback method. In the event that a "click" event is detected on the screen at the location of the button view, the Android framework will call the onClick() method of that view when that event is removed from the event queue. It is, of course, within the implementation of the onClick() callback method that any tasks should be performed or other methods called in response to the button click.
+
+The next section will take a look at how to set the event handler via a button's `onClick` attribute. Later in this course we will explore other and better options.
+
+### Using the android:onClick Resource
+
+Before exploring event listeners in more detail it is worth noting that a shortcut is available when all that is required is for a callback method to be called when a user "clicks" on a button view in the user interface.
+
+Consider our user input form containing a button view named `submit` with the requirement that when the user touches the button, a method called `onSubmitClick()` declared in the activity class is called. All that is required to implement this behavior is to write the `onSubmitClick()` method (which takes as an argument a reference to the view that triggered the click event).
+
+Let's for example place this code inside of our main activity to handle the event of the submit button.
+
+```java
+public void onSubmitClick(View button) {
+    Snackbar.make(button, "Submit button is clicked", Snackbar.LENGTH_LONG)
+            .setAction("Action", null).show();
+}
+```
+
+The code above is partly copied from the boilerplate code that was generated. It creates a message similar to the one shown when you click the little envelope.
+
+Next the method name has to be passed to the button component via the `onClick` attribute as shown below:
+
+![Setting button onClick handler](img/event_handler_submit.png)
+
+Using this method imposes a performance penalty since the framework has to use reflection to call your class's method. Gingerbread and above should be fine (better jit) but before that the difference was noticeable.
+
+Another drawback is that the xml method is less maintainable as it puts "code things" (method names) inside the presentation layer. Untangling which handler is set where requires diligent comments, which developers all too often forget to add.
+
+### Getting Information out of Views
+
+While the above handler is a big step forward, we do want to display a more personal message to the user. For this we will need to acquire the text that the user typed inside the `EditText` views, such as his name and message.
+
+While in Java (with Swing or JavaFX) our visual components where actual attributes of our classes. This means we had something like this at the top of our class code:
+
+```java
+public class HelloWorld {
+  private TextField name;
+  private TextField message;
+
+  public HelloWorld() {
+    name = new TextField();
+    message = new TextField();
+  }
+}
+```
+
+We don't see that anywhere in our current Java code here. That is because this is all done in the background when our activity is launched through the content of the XML file. Because of this the created components are not directly accessible (they are created at run-time).
+
+The only way to access the visual components is by using some sort of indexing mechanism based on the ID's of the components. We can actually ask an Activity to search for a component with a specific ID. If found the method will return a object of type `T` which can then be casted to an object of the type we were searching for. If none is found, null is returned.
+
+By using the public `id` listing of the `R` class we can make sure that we only request existing components. This allows us to omit the not-null check.
+
+> #### Info::R.java
+> R.java is the dynamically generated class, created during the build process to dynamically identify all assets (from strings to android widgets to layouts), for usage in java classes in Android app. Note this R.java is Android specific, so it doesn't have much to do with Java language constructs.
+
+This comes all together in the code shown below. Take a good look at the casting of the return object and the places of the parentheses.
+
+```java
+public void onSubmitClick(View button) {
+    String username = ((EditText)findViewById(R.id.name)).getText().toString();
+    String message = ((EditText)findViewById(R.id.message)).getText().toString();
+
+    Snackbar.make(button, username + " says " + message, Snackbar.LENGTH_LONG)
+            .setAction("Action", null).show();
+}
+```
