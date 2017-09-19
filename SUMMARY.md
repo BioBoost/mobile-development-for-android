@@ -14,6 +14,12 @@
 <!-- * [Quiz](hello_android_world/quiz.md) -->
 <!-- * [Exercises](hello_android_world/exercises.md) -->
 
+### Interacting with the User
+* [Interacting with the User](interacting_with_user/readme.md)
+<!-- * [Summary](hello_android_world/summary.md) -->
+<!-- * [Quiz](hello_android_world/quiz.md) -->
+<!-- * [Exercises](hello_android_world/exercises.md) -->
+
 <!-- ### Debugging -->
 <!-- * [Debugging](debugging/readme.md) -->
 <!-- * [Summary](debugging/summary.md) -->
