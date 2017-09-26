@@ -125,6 +125,8 @@ An activity has essentially four states.
 
 If an activity is paused or stopped, the system can drop the activity from memory by either asking it to finish, or simply killing its process. When it is displayed again to the user, it must be completely restarted and restored to its previous state. It is your task as a programmer to save the state of the activity before it is killed. Android provides **callback methods** which can be used for this purpose
 
+The Activity class is a crucial component of an Android app, and the way activities are launched and put together is a fundamental part of the platform's application model. Unlike programming paradigms in which apps are launched with a `main()` method, the Android system initiates code in an Activity instance by invoking specific callback methods that correspond to specific stages of its lifecycle.
+
 ![Activity Lifecycle](img/activity_lifecycle.png)
 
 The square rectangles represent callback methods you can implement to perform operations when the Activity moves between states. The colored ovals are major states the Activity can be in.
