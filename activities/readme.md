@@ -88,7 +88,6 @@ The Layout can be found as two files inside `res/layout`
 
 ## Lifecycle of an Activity
 
-
 As a user navigates through, out of, and back to your app, the Activity instances in your app transition through different states in their lifecycle. The Activity class provides a number of callbacks that allow the activity to know that a state has changed: that the system is creating, stopping, or resuming an activity, or destroying the process in which the activity resides.
 
 Within the lifecycle callback methods, you can declare how your activity behaves when the user leaves and re-enters the activity. For example, if you're building a streaming video player, you might pause the video and terminate the network connection when the user switches to another app. When the user returns, you can reconnect to the network and allow the user to resume the video from the same spot. In other words, each callback allows you to perform specific work that's appropriate to a given change of state. Doing the right work at the right time and handling transitions properly makes your app more robust and performant. For example, good implementation of the lifecycle callbacks can help ensure that your app avoids:
@@ -97,3 +96,43 @@ Within the lifecycle callback methods, you can declare how your activity behaves
 * Consuming valuable system resources when the user is not actively using it.
 * Losing the user's progress if they leave your app and return to it at a later time.
 * Crashing or losing the user's progress when the screen rotates between landscape and portrait orientation.
+
+### Activity Stack
+
+Activities in the system are managed as an activity stack. When a new activity is started, it is placed on the top of the stack and becomes the running activity. The previous activity remains below it in the stack. It will not come to the foreground again until the new activity exits.
+
+![Activity Stack](img/stack.png)
+
+When you press the back button the current activity is *destroyed*. The stack's top activity is then shown.
+
+### LifeCycle of an Activity
+
+An activity has essentially four states.
+* If an activity in the **foreground** of the screen (at the **top of the stack**), it is **active** or **running** ("Activity 1" in the example below is running / alive).
+
+![Activity 1 is running](img/stack_2_activities.png)
+
+* If an activity has **lost focus** but is **still visible** (that is, a new non-full-sized or transparent activity has focus on top of your activity), it is **paused**.
+ * A paused activity is **completely alive** (it maintains all state and member information and remains attached to the window manager)
+ * However it **can be killed** by the system in extreme low memory situations.
+
+ ![Paused Activity](img/paused.png)
+
+* If an activity is **completely obscured** by another activity, it is **stopped** ("Activity 2" in the example below is stopped).
+ * It still retains all state and member information, however, it is no longer visible to the user so its window is hidden and it can be killed by the system when memory is needed elsewhere.
+
+![Activity 2 is stopped](img/stack_2_activities.png)
+
+If an activity is paused or stopped, the system can drop the activity from memory by either asking it to finish, or simply killing its process. When it is displayed again to the user, it must be completely restarted and restored to its previous state. It is your task as a programmer to save the state of the activity before it is killed. Android provides **callback methods** which can be used for this purpose
+
+![Activity Lifecycle](img/activity_lifecycle.png)
+
+The square rectangles represent callback methods you can implement to perform operations when the Activity moves between states. The colored ovals are major states the Activity can be in.
+
+Crucial to know is that an Activity can be destroyed by the OS or the user at any time the activity loses focus. Hence you will need to provide the necessary code to save the state of your application when it is destroyed. Depending on the complexity of your activity, you probably don't need to implement all the lifecycle methods. However, it's important that you understand each one and implement those that ensure your app behaves the way users expect.
+
+Some general guidelines are:
+* Use `onCreate()` to create and instantiate objects that your application will be using
+* Use `onResume()` to start any services or code that needs to run while your activity is in the foreground
+* Use `onPause()` to stop any services or code that does not need to run when your application is in the background
+* Use `onDestroy()` to free up resources before your activity is destroyed

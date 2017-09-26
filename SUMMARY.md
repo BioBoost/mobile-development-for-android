@@ -39,5 +39,11 @@
 <!-- * [Exercises](debugging/exercises.md) -->
 
 ----
+### Assignments
+
+<!-- * [Assignments](assignments/readme.md) -->
+* [Week 2](assignments/week_2.md)
+
+----
 
 * [Sources](sources.md)
