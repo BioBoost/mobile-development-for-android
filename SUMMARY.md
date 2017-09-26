@@ -20,6 +20,12 @@
 <!-- * [Quiz](hello_android_world/quiz.md) -->
 <!-- * [Exercises](hello_android_world/exercises.md) -->
 
+### Activities
+* [Activities](activities/readme.md)
+<!-- * [Summary](hello_android_world/summary.md) -->
+<!-- * [Quiz](hello_android_world/quiz.md) -->
+<!-- * [Exercises](hello_android_world/exercises.md) -->
+
 <!-- ### Debugging -->
 <!-- * [Debugging](debugging/readme.md) -->
 <!-- * [Summary](debugging/summary.md) -->
