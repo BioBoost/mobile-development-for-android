@@ -124,3 +124,83 @@ Intent searchInternetIntent = new Intent(Intent.ACTION_WEB_SEARCH );
 searchInternetIntent.putExtra(SearchManager.QUERY, queryString);
 startActivity(searchInternetIntent);
 ```
+
+## Responding to Implicit Intents
+
+Earlier, you saw how an activity can invoke another activity using the Intent object.
+
+To advertise which implicit intents your app can receive, declare one or more intent filters for each of your app components with an <intent-filter> element in your manifest file. Each intent filter specifies the type of intents it accepts based on the intent's `action`, `data`, and `category`. The system delivers an implicit intent to your app component only if the intent can pass through one of your intent filters.
+
+The appropriate component is determined based on the intent information supplied in the *AndroidManifest.xml* file as follows:
+
+* `<action>`, declares the intent action accepted, in the `name` attribute. The value must be the literal string value of an action, not the class constant.
+* `<data>`, declares the type of data accepted, using one or more attributes that specify various aspects of the data URI (scheme (such as http: or mailto:), host, port, path) and MIME type.
+* `<category>`, declares the intent category accepted, in the name attribute. The value must be the literal string value of an action, not the class constant.
+
+Let's try it out and create a new application and add the following intent filter to the `MainActivity` in the manifest file.
+
+```XML
+<activity
+  android:name=".MainActivity"
+  android:label="@string/app_name"
+  android:theme="@style/AppTheme.NoActionBar" >
+  <intent-filter>
+    <action android:name="android.intent.action.MAIN" />
+    <category android:name="android.intent.category.LAUNCHER" />
+  </intent-filter>
+  <intent-filter>
+    <action android:name="android.intent.action.VIEW" />
+    <category android:name="android.intent.category.DEFAULT" />
+    <data android:scheme="http" />
+  </intent-filter>
+</activity>
+```
+
+The data node states that the intent data should adhere to the http-scheme. In other words, the data attached to the intent object should start with `http://`.
+
+To allow this to work we need to give the application permission to access the Internet. Place the following permission node on the same level as the application node in the manifest file.
+
+```XML
+<uses-permission android:name="android.permission.INTERNET"/>
+```
+
+Next add a WebView component to your main activity.
+
+In the `onCreate()` method of `MainActivity` we need to get the data (the URL of the site) from the intent.
+
+
+```java
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+  super.onCreate(savedInstanceState);
+  setContentView(R.layout.activity_main);
+
+  // ...
+
+  if (getIntent().getData() != null){
+    // Get the URL
+    Uri url = getIntent().getData();
+
+    // Get the WebView
+    WebView webview = (WebView)findViewById(R.id.webView);
+
+    // Specify a WebViewClient
+    webview.setWebViewClient(new WebViewCallback());
+
+    // Load up the URL
+    webview.loadUrl(url.toString());
+  } else {
+    // Message to user we failed
+  }
+}
+```
+
+Now how do we test this? Quickest solution is to open the notepad application and enter a URL. When you click it you should get the option to launch your application.
+
+If you do not declare any intent filters for an activity, then it can only be started with an explicit intent from inside your own application.
+
+You can create a filter that includes more than one instance of <action>, <data>, or <category>. If you do, you need to be certain that the component can handle any and all combinations of those filter elements.
+
+When you want to handle multiple kinds of intents, but only in specific combinations of action, data, and category type, then you need to create multiple intent filters.
+
+An implicit intent is tested against a filter by comparing the intent to each of the three elements. To be delivered to the component, the intent must pass all three tests. If it fails to match even one of them, the Android system won't deliver the intent to the component. However, because a component may have multiple intent filters, an intent that does not pass through one of a component's filters might make it through on another filter.
