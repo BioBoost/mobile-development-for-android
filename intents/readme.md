@@ -166,8 +166,25 @@ To allow this to work we need to give the application permission to access the I
 
 Next add a WebView component to your main activity.
 
-In the `onCreate()` method of `MainActivity` we need to get the data (the URL of the site) from the intent.
+We also need to extend the `WebViewClient` class and override the `shouldOverrideUrlLoading()` method as show below.
 
+```java
+public class MainActivity extends AppCompatActivity {
+    private class WebViewCallback extends WebViewClient {
+      @Override
+      public boolean shouldOverrideUrlLoading(WebView view, String url) {
+        // Allows the app to interfere with loading of a url
+        return false;
+        // return true means the host application handles the url
+        // return false means the current WebView handles the url
+      }
+    }
+
+    // ...
+}
+```
+
+In the `onCreate()` method of `MainActivity` we need to get the data (the URL of the site) from the intent.
 
 ```java
 @Override
