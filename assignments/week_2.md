@@ -33,3 +33,9 @@ Add a `TextView` to your about activity stating something like: "This app was ma
 Create a new activity and add a WebView to it. Add to code to the `onCreate()` callback to handle the URL passed in the intent. Next add an intent filter to the activity so it can function as a browser.
 
 Try it out. Does it come up as an option when you click the link in your about activity?
+
+## Assignment - Touch location
+
+Add two TextViews to your main activity that display the last touch location of the user inside your activity.
+
+Make use of the correct touch event.
